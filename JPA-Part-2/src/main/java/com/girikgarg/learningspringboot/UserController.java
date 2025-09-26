@@ -16,7 +16,7 @@ public class UserController {
     @GetMapping(path="/test-jpa")
     public List<UserDetails> getUser() {
         UserDetails userDetails = new UserDetails("xyz", "xyz@abc.com");
-        userDetailsService.saveUser(userDetails);
+        userDetailsService.saveUser2(userDetails);
         return userDetailsService.getAllUsers();
     }
 }
