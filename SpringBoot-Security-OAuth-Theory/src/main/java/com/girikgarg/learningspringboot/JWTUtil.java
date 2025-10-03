@@ -1,0 +1,40 @@
+package com.girikgarg.learningspringboot;
+
+import org.springframework.stereotype.Component;
+import java.nio.charset.StandardCharsets;
+import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.JwtException;
+import java.security.Key;
+import java.util.Date;
+
+@Component
+public class JWTUtil {
+    private static final String SECRET_KEY = "your-secret-key-with-minimum-32-bytes";
+    private static final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
+
+    // Generate JWT token
+    public String generateToken(String username, long expiryInMinutes) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + expiryInMinutes * 60 * 1000)) // in milliseconds
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
+    }
+
+    public String validateAndExtractUsername(String token) {
+        try {
+            return Jwts.parser()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .getSubject();
+        }
+        catch (JwtException e) {
+            return null; // Invalid or JWT token
+        }
+    }
+}
