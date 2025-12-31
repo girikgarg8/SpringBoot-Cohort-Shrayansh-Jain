@@ -9,10 +9,10 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.girikgarg</groupId>
-	<artifactId>eureka-server</artifactId>
+	<artifactId>product-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>eureka-server</name>
-	<description>Eureka Server for Service Discovery</description>
+	<name>product-service</name>
+	<description>Product Service - Eureka Client</description>
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2023.0.0</spring-cloud.version>
@@ -24,21 +24,22 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		
-		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-test</artifactId>
+		<scope>test</scope>
+	</dependency>
+	
+	<dependency>
+		<groupId>io.github.resilience4j</groupId>
+		<artifactId>resilience4j-spring-boot3</artifactId>
+		<version>2.1.0</version>
+	</dependency>
+</dependencies>
 	
 	<dependencyManagement>
 		<dependencies>
@@ -64,13 +65,6 @@
 			<url>https://repo.spring.io/milestone</url>
 		</repository>
 	</repositories>
-	
-	<pluginRepositories>
-		<pluginRepository>
-			<id>central</id>
-			<url>https://repo1.maven.org/maven2</url>
-		</pluginRepository>
-	</pluginRepositories>
 	
 	<build>
 		<plugins>
