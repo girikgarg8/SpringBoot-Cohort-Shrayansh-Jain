@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Security Attacks Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #d32f2f;
+            text-align: center;
+        }
+        .attack-list {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .attack-item {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+        }
+        .attack-item h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+        .attack-item a {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+            padding: 8px 16px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .attack-item a:hover {
+            background: #0056b3;
+        }
+        .warning {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .warning h3 {
+            color: #721c24;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>⚠️ Security Attacks Demo</h1>
+    
+    <div class="warning">
+        <h3>⚠️ WARNING</h3>
+        <p>This application demonstrates common security vulnerabilities. <strong>NEVER</strong> use these patterns in production code!</p>
+    </div>
+
+    <div class="attack-list">
+        <div class="attack-item">
+            <h3>1. CSRF (Cross-Site Request Forgery)</h3>
+            <p>Demonstrates how an attacker can trick authenticated users into performing unwanted actions.</p>
+            <a href="/login">Go to Login (Step 1)</a>
+        </div>
+
+        <div class="attack-item">
+            <h3>2. XSS (Cross-Site Scripting)</h3>
+            <p>Demonstrates stored XSS where malicious scripts are saved in the database and executed when rendered.</p>
+            <a href="/xss/comments">Go to Comments Page</a>
+        </div>
+
+        <div class="attack-item">
+            <h3>3. SQL Injection</h3>
+            <p>Demonstrates how SQL queries can be manipulated through user input.</p>
+            <p>Test with: <code>?name=AA</code> or <code>?name=' OR '1'='1</code></p>
+            <a href="/sql-injection/find?name=AA">Normal Query</a>
+            <a href="/sql-injection/find?name=' OR '1'='1">SQL Injection</a>
+        </div>
+
+        <div class="attack-item">
+            <h3>4. CORS (Cross-Origin Resource Sharing)</h3>
+            <p>CORS is configured to allow cross-origin requests (check SecurityConfig.java)</p>
+            <p>This enables the CSRF attack demo from a different origin.</p>
+        </div>
+    </div>
+</body>
+</html>
+

