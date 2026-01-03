@@ -20,3 +20,4 @@ public interface ProductClientWithErrorDecoder {
     Product updateProductServerError(@PathVariable("id") String id);
 }
 
+

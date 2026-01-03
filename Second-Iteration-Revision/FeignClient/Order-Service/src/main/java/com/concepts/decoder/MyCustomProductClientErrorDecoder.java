@@ -32,3 +32,4 @@ public class MyCustomProductClientErrorDecoder implements ErrorDecoder {
     }
 }
 
+

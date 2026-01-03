@@ -11,3 +11,4 @@ public interface ProductClient {
     String getProductById(@PathVariable("id") String id);
 }
 
+
